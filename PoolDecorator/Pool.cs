@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
 
-namespace Pool.PoolDecorator
+namespace Pools.PoolDecorator
 {
-    public class Pool<T> : ObjectProviderDecorator<T> where T : IPoolObject
+    public class Pool<T> : FactoryDecorator<T> where T : IPoolObject
     {
         private readonly Queue<T> _inactiveObjects;
         private readonly List<T> _activeObjects;
 
-        public Pool(IObjectProvider<T> provider) : this(provider, new Queue<T>(), new List<T>())
+        public Pool(IFactory<T> provider) : this(provider, new Queue<T>(), new List<T>())
         {
         }
 
-        public Pool(IObjectProvider<T> provider, Queue<T> inactiveObjects, List<T> activeObjects) :
+        public Pool(IFactory<T> provider, Queue<T> inactiveObjects, List<T> activeObjects) :
             base(provider)
         {
             _inactiveObjects = inactiveObjects;
             _activeObjects = activeObjects;
         }
 
-        public override T GetInactiveObject()
+        public override T Object()
         {
             var inactiveObject = HasInactiveObjects() ? _inactiveObjects.Dequeue() : InactiveObject();
 
@@ -36,7 +36,7 @@ namespace Pool.PoolDecorator
         {
             RecalculateInactiveObjects();
 
-            return HasInactiveObjects() ? _inactiveObjects.Dequeue() : Provider.GetInactiveObject();
+            return HasInactiveObjects() ? _inactiveObjects.Dequeue() : Provider.Object();
         }
 
         private void RecalculateInactiveObjects()
@@ -44,7 +44,7 @@ namespace Pool.PoolDecorator
             var lastIndex = _activeObjects.Count - 1;
             var lastObject = _activeObjects[lastIndex];
 
-            for (var i = 0; i < _activeObjects.Count; i++)
+            for (var i = lastIndex - 1; i >= 0; i--)
             {
                 var currentObject = _activeObjects[i];
 

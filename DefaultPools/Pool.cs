@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Pool.DefaultPools
+namespace Pools.DefaultPools
 {
     public class Pool<T> where T : IPoolObject
     {

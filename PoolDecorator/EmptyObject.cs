@@ -1,4 +1,6 @@
-﻿namespace Pool.PoolDecorator
+﻿using UnityEngine;
+
+namespace Pools.PoolDecorator
 {
     public class EmptyObject : IPoolObject
     {
@@ -9,7 +11,7 @@
 
         public void Enable()
         {
-            
+            Debug.Log("Enabled");
         }
     }
 }

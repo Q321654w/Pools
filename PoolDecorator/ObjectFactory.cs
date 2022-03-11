@@ -1,8 +1,8 @@
-﻿namespace Pool.PoolDecorator
+﻿namespace Pools.PoolDecorator
 {
-    public class ObjectFactory : IObjectProvider<IPoolObject>
+    public class ObjectFactory : IFactory<IPoolObject>
     {
-        public IPoolObject GetInactiveObject()
+        public IPoolObject Object()
         {
             return new EmptyObject();
         }

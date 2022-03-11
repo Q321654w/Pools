@@ -1,4 +1,4 @@
-﻿namespace Pool.DefaultPools
+﻿namespace Pools.DefaultPools
 {
     public interface IPoolObject
     {

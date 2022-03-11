@@ -1,4 +1,4 @@
-﻿namespace Pool.PoolDecorator
+﻿namespace Pools.PoolDecorator
 {
     public interface IPoolObject
     {
